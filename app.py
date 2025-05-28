@@ -36,7 +36,7 @@ else:
     # 展示故事
     current_file = st.session_state.get('current_file')
     if current_file:
-        st.subheader(f"故事：{current_file}")
+        st.subheader(f"开始听故事吧！")
         audio_path = os.path.join(STORY_DIR, current_file)
         with open(audio_path, 'rb') as f:
             audio_bytes = f.read()
