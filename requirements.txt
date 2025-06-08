@@ -1,3 +1,4 @@
 streamlit 
 fish-audio-sdk
 mutagen
+streamlit-autorefresh
