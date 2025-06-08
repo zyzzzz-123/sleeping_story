@@ -7,7 +7,7 @@ import base64
 from streamlit_autorefresh import st_autorefresh
 
 # 配置
-STORY_DIR = "story_records/converted"
+STORY_DIR = "story_records"
 MAX_PER_DAY = 2  # 每天最多抽取数量
 
 # 获取今天日期
@@ -36,6 +36,7 @@ if 'auto_audio_start' not in st.session_state:
 
 # 获取所有 mp3 文件
 all_files = [f for f in os.listdir(STORY_DIR) if f.endswith('.m4a')]
+print(all_files)
 remaining_files = list(set(all_files) - set(st.session_state['drawn_files']))
 
 st.set_page_config(page_title="小章给你讲睡前故事", page_icon="🌙", layout="centered")
