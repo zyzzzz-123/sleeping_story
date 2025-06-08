@@ -35,7 +35,7 @@ if 'auto_audio_start' not in st.session_state:
     st.session_state['auto_audio_start'] = None
 
 # 获取所有 mp3 文件
-all_files = [f for f in os.listdir(STORY_DIR) if f.endswith('.mp3')]
+all_files = [f for f in os.listdir(STORY_DIR) if f.endswith('.m4a')]
 remaining_files = list(set(all_files) - set(st.session_state['drawn_files']))
 
 st.set_page_config(page_title="小章给你讲睡前故事", page_icon="🌙", layout="centered")
