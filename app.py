@@ -35,8 +35,15 @@ if 'auto_audio_start' not in st.session_state:
     st.session_state['auto_audio_start'] = None
 
 # 获取所有 mp3 文件
+NEW_DIR = os.path.join(STORY_DIR, "new")
+if os.path.exists(NEW_DIR):
+    new_files = [f for f in os.listdir(NEW_DIR) if f.endswith('.m4a')]
+    new_files = [os.path.join('new', f) for f in new_files]
+else:
+    new_files = []
 all_files = [f for f in os.listdir(STORY_DIR) if f.endswith('.m4a')]
-print(all_files)
+all_files = [f for f in all_files if not f.startswith('new/')]  # Exclude new/ from main list
+all_files = new_files + all_files  # Prioritize new_files
 remaining_files = list(set(all_files) - set(st.session_state['drawn_files']))
 
 st.set_page_config(page_title="小章给你讲睡前故事", page_icon="🌙", layout="centered")
@@ -58,7 +65,10 @@ else:
     current_file = st.session_state.get('current_file')
     if current_file:
         st.subheader(f"开始听故事吧！")
-        audio_path = os.path.join(STORY_DIR, current_file)
+        if current_file.startswith('new/'):
+            audio_path = os.path.join(STORY_DIR, current_file)
+        else:
+            audio_path = os.path.join(STORY_DIR, current_file)
         with open(audio_path, 'rb') as f:
             audio_bytes = f.read()
         st.audio(audio_bytes, format='audio/m4a')
